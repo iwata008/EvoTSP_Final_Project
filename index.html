@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Evo-TSP</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Evolving solutions to a TSP instance">
+    <meta name="author" content="">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/evotsp.css">
+</head>
+
+<body>
+    <h1>Evo-TSP</h1>
+    <div>
+        <h2>"Global" parameters</h2>
+
+        <label for="runId-text-field">Run ID:</label>
+        <input type="text" id="runId-text-field" name="runId-text-field">
+
+        <label for="generation-text-field">Generation:</label>
+        <input type="text" id="generation-text-field" name="generation-text-field">
+    </div>
+
+    <div class="generate-routes">
+        <h2>Generate new random routes</h2>
+
+        <label for="num-to-generate">How many to generate?</label>
+        <input type="text" id="num-to-generate" name="num-to-generate">
+
+        <button id="generate-random-routes">Generate random routes</button> 
+        <div id="random-route-details"></div>
+
+        <div id="new-routes">
+            <ol id="new-route-list">
+            </ol>
+        </div>
+    </div>
+    
+    <div class="get-best-routes">
+        <h2>Get best routes</h2>
+
+        <label for="num-best-to-get">How many to get?</label>
+        <input type="text" id="num-best-to-get" name="num-best-to-get">
+
+        <input type="button" id="get-best-routes" value="Get best routes">
+
+        <div id="best-routes">
+            <ol id="best-route-list">
+            </ol>
+        </div>
+    </div>
+
+    <div class="get-route-by-id">
+        <h2>Get route by ID</h2>
+
+        <label for="route-ID">Route ID to retrieve?</label>
+        <input type="text" id="route-ID" name="route-ID">
+
+        <input type="button" id="get-route-by-id" value="Get route by ID">
+
+        <div id="route-by-id">
+            <ul id="route-by-id-elements">
+            </ul>
+        </div>
+    </div>
+
+    <script src="js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="js/vendor/async.min.js"></script>
+    <script src="js/evotsp.js"></script>
+</body>
+</html>
