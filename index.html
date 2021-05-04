@@ -6,11 +6,15 @@
   <metacharset="utf-8"/>
   <metahttp-equiv="X-UA-Compatible" content="IE=edge"/>
   <metaname="description" content="Evolving solutions to a TSP instance"/>
-  <metaname="author" content="PUT YOUR NAME HERE"/>
+  <metaname="author" content="Machi Iwata"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
   <linkrel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="↪crossorigin=""/>
   <!-- Make sure you put this AFTER Leaflet's CSS -->
-  <scriptsrc="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="↪crossorigin="">
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="↪crossorigin="">
 </script>
+
 </head>
 
 <body>
@@ -24,6 +28,82 @@
     <label for="num-parents">Number of parents to keep:</label>
     <input type="text"id="num-parents"/>
   </div>
+
+  <!-- Upload the map here-->
+  <div id="mymapid" style="height:500px">
+  </div>
+  <script>
+   var mymap = L.map('mymapid').setView([45.586111, -95.913889], 7);
+   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 13,
+      id: 'mapbox/streets-v11',
+      tileSize: 512,
+      zoomOffset: -1,
+      accessToken: 'pk.eyJ1IjoiYWlybWFjaGk2NCIsImEiOiJja243amh3MjIwb2dlMm9yaW9pNmtqZjJuIn0.z89ll0flR8mqgW8ud1AXFw'
+  }).addTo(mymap);
+  
+  </script>
+  
+  <script>
+   var cities=[{"type":"Feature","properties":{"name":"Rochester MN","show_on_map":true,"popupContent":"Rochester MN"},"geometry":{"type":"Point", "coordinates":[-92.4802, 44.0121]}},
+   {"type":"Feature","properties":{"name":"Worthington MN","show_on_map":true,"popupContent":"Worthington MN"},"geometry":{"type":"Point", "coordinates":[-95.5964,43.623255]}},
+   {"type":"Feature","properties":{"name":"Grand Marais MN","show_on_map":true,"popupContent":"Grand Marais MN"},"geometry":{"type":"Point", "coordinates":[-90.3343, 47.7504]}},
+   {"type":"Feature","properties":{"name":"Fargo ND","show_on_map":true,"popupContent":"Fargo ND"},"geometry":{"type":"Point", "coordinates":[-96.7898, 46.8772]}},
+   {"type":"Feature","properties":{"name":"Roseau MN","show_on_map":true,"popupContent":"Roseau MN"},"geometry":{"type":"Point", "coordinates":[-95.7628, 48.8461]}},
+   {"type":"Feature","properties":{"name":"Saint Paul MN","show_on_map":true,"popupContent":"Saint Paul MN"},"geometry":{"type":"Point", "coordinates":[-93.17459, 44.913815]}},
+   {"type":"Feature","properties":{"name":"Duluth MN","show_on_map":true,"popupContent":"Duluth MN"},"geometry":{"type":"Point", "coordinates":[-92.1005, 46.7867]}},
+   {"type":"Feature","properties":{"name":"Bemidji MN","show_on_map":true,"popupContent":"Bemidji MN"},"geometry":{"type":"Point", "coordinates":[-94.87105, 47.504496]}},
+   {"type":"Feature","properties":{"name":"Morris MN","show_on_map":true,"popupContent":"Morris MN"},"geometry":{"type":"Point", "coordinates":[-95.9092, 45.584124]}},
+   {"type":"Feature","properties":{"name":"Saint Cloud MN","show_on_map":true,"popupContent":"Saint Cloud MN"},"geometry":{"type":"Point", "coordinates":[-94.1632, 45.5579]}},
+   {"type":"Feature","properties":{"name":"Minneapolis MN","show_on_map":true,"popupContent":"Minneapolis MN"},"geometry":{"type":"Point", "coordinates":[-93.2554, 44.9782]}}
+   ];
+  
+   function circleConvert(feature, latlng) {
+   return new L.CircleMarker(latlng, {radius: 5, color: '#FF0000'})
+   }
+  
+   function onEachFeature(feature, layer) {
+   if (feature.properties && feature.properties.popupContent) {
+     layer.bindPopup(feature.properties.popupContent);
+     }
+   }
+  
+   var layerProcessing = {
+    pointToLayer: circleConvert,
+    onEachFeature: onEachFeature
+   }
+  
+   var cityLayer = L.geoJSON(cities, layerProcessing).addTo(mymap);
+  
+  
+  </script>
+  
+  <script>
+   var path= [[47.7504, -90.3343], [43.623255, -95.5964], [46.8772, -96.7898], [44.913815, -93.17459], [48.8461, -95.7628], [46.7867, -92.1005], [47.504496, -94.87105], [45.584124, -95.9092],
+   [45.5579, -94.1632],  [44.0121, -92.4802], [44.9782, -93.2554], [47.7504, -90.3343]];
+  
+   var lineStyle={
+   "dashArray": [
+      10,
+      20
+     ],
+     "weight":5,
+     "color": "#0000FF",
+   }
+  
+   var fillStyle={
+     "weight": 5,
+     "color": "#FFFFFF"
+   }
+  
+   L.polyline(path,fillStyle).addTo(mymap);
+   L.polyline(path,lineStyle).addTo(mymap);
+  
+  </script>
+
+  <!-- END OF MAP CODE -->
+
   <div id="map"style="height: 500px; width: 500px">
   </div>
   <div id="best-run-routes">
@@ -68,7 +148,7 @@
         attribution:
         'Map data &copy; <ahref="https://www.openstreetmap.org/copyright">OpenStreetMap</a>contributors, Imagery © <ahref="https://www.mapbox.com/">Mapbox</a>',
         maxZoom:18,i
-        d:"mapbox/streets-v11",
+        ,d:"mapbox/streets-v11",
         tileSize:512,
         zoomOffset:-1,
         accessToken:"pk.eyJ1IjoiYWlybWFjaGk2NCIsImEiOiJja243amh3MjIwb2dlMm9yaW9pNmtqZjJuIn0.z89ll0flR8mqgW8ud1AXFw",
