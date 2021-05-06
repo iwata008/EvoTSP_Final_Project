@@ -371,6 +371,7 @@
         // function in the Ajax call.
         function fetchCityData(callback) {
                 // FILL THIS IN
+                console.log(baseUrl + '/city-data');
                 $.ajax({
                         method: 'GET',
                         url: baseUrl + '/city-data',
