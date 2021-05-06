@@ -39,7 +39,7 @@
   };
   ////////////////////////////////////////////////////////////
   // BEGIN OF RUN EVOLUTION //////////////////////////////////
-  1
+
   ////////////////////////////////////////////////////////////
   // This runs the evolutionary process. This function and it's
   // helper functions are all complete and you shouldn't have to
@@ -82,7 +82,7 @@
     }
     function runAllGenerations(cb) {
       // get number of generations
-      2
+
       const numGenerations = parseInt($("#num-generations").val());
       // `async.timesSeries` runs the given function the specified number
       // of times. Unlike `async.times`, which does all the calls in
@@ -111,25 +111,26 @@
     }
   }
   function randomRoute(runId, generation, cb) {
-    AWSAjax(
-      {
-        runId: runId,
-        generation: generation,
-        lengthStoreThreshold: lengthStoreThreshold,
-      },
-      "/Routes",
-      displayRoute,
-      ["generating random route", "when creating a random route"]
-    )
-    // If the Ajax call succeeds, return the newly generated route.
-    .done((newRoute) => { cb(null, newRoute); })
-    // If the Ajax call fails, print a message and pass the error up through
-    // the callback function `cb`.
-    3
-    .fail((jqHXR, textStatus, err) => {
-      console.error("Problem with randomRoute AJAX call: " + textStatus);
-      cb(err);
-    });
+    $.ajax({
+      method: 'POST',
+      url: baseUrl + '/Routes',
+      data: JSON.stringify({
+          runId: runId,
+          generation: generation
+      }),
+      contentType: 'application/json',
+
+      success: (displayRoute) => callback(null, displayRoute),
+      error: function ajaxError(jqXHR, textStatus, errorThrown) {
+          console.error(
+              'Error generating random route: ',
+              textStatus,
+              ', Details: ',
+              errorThrown);
+          console.error('Response: ', jqXHR.responseText);
+          alert('An error occurred when creating a random route:\n' + jqXHR.responseText);
+      }
+  })
   }
   ////////////////////////////////////////////////////////////
   // END OF RUN EVOLUTION ////////////////////////////////////
@@ -168,7 +169,7 @@
     // If they don't have any values to pass on, they just call `cb()`.
     //
     // `async.constant` lets us insert one or more specific values into the
-    4
+
     // pipeline, which then become the input(s) to the next item in the
     // waterfall. Here we'll inserting the current generation number so it will
     // be the argument to the next function.
@@ -212,7 +213,7 @@
     function updateGenerationHTMLcomponents(reset_cb) {
       $("#new-route-list").text("");
       $("#current-generation").text(generation + 1);
-      5
+
       reset_cb();
     }
     // Given an array of "parent" routes, generate `numChildren` mutations
@@ -256,7 +257,7 @@
   ////////////////////////////////////////////////////////////
   // END OF RUN GENERATION ///////////////////////////////////
   ////////////////////////////////////////////////////////////
-  6
+
   ////////////////////////////////////////////////////////////
   // START OF AJAX CALLS /////////////////////////////////////
   ////////////////////////////////////////////////////////////
@@ -344,7 +345,7 @@
           }
       })
   }
-  7
+
   // Get the full details of the specified route. You should largely
   // have this done from the previous exercise. Make sure you pass
   // `callback` as the `success` callback function in the Ajax call.
@@ -418,7 +419,7 @@
   }
   // Display all the children. This just uses a `forEach`
   // to call `displayRoute` on each child route. This
-  8
+
   // should be complete and work as is.
   function displayChildren(children, dc_cb) {
     children.forEach(child => displayRoute(child));
@@ -448,7 +449,7 @@
   function displayBestRoutes(bestRoutes, dbp_cb) {
     // FILL THIS IN
     console.log('Best route received from API: ', bestRoutes);
-    
+
 
   }
   ////////////////////////////////////////////////////////////
@@ -467,7 +468,7 @@
     });
     ubr_cb(null, children);
   }
-  9
+
   // This is called whenever a route _might_ be the new best
   // route. It will get the full route details from the appropriate
   // Lambda, and then plot it if it's still the best. (Because of
@@ -509,7 +510,7 @@
   ////////////////////////////////////////////////////////////
   // START OF MAPPING TOOLS //////////////////////////////////
   ////////////////////////////////////////////////////////////
-  10
+
   // The next few functions handle the mapping of the best route.
   // This is all complete and you shouldn't have to change anything
   // here.
@@ -552,7 +553,6 @@
         },
       };
       geojsonFeature.properties.name = cityName;
-      11
       geojsonFeature.properties.popupContent = cityName;
       geojsonFeature.geometry.coordinates[0] = city.location[1];
       geojsonFeature.geometry.coordinates[1] = city.location[0];
@@ -592,7 +592,6 @@
   $(function onDocReady() {
     // These set you up with some reasonable defaults.
     $("#population-size-text-field").val(100);
-    12
     $("#num-parents").val(20);
     $("#num-generations").val(20);
     $("#run-evolution").click(runEvolution);
