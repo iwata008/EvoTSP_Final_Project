@@ -173,25 +173,28 @@ function addOneToGen(oldRunGen) {
     // so only focus on generation then add 1
 
 
-    var strGeneration = oldRunGen;
-    var strRunId = oldRunGen;
-
-    // take only number part
-    // Got it from https://stackoverflow.com/questions/1623221/how-to-find-a-number-in-a-string-using-javascript/30160994
-    const extractedGeneration = strGeneration.replace(/[^0-9]/g, "");
-    // console.log(strGeneration); // 17
-    var parsedGeneration = parseInt(extractedGeneration);
-    parsedGeneration = parsedGeneration + 1;
+const strGeneration = oldRunGen;
 
 
-    // Take runId part before the "#" mark
-    // Got it from https://stackoverflow.com/questions/17561831/get-some-string-before-the-space-and-save-it-in-a-variable-with-javascript
-    var parsedRunId = strRunId.split("#")[0];
+	// Find where the '#' is
+   const atSharp = oldRunGen.indexOf("#");
+	// Shour return '3' in this case
 
-    // Append everything together and return it
-    return (parsedRunId + "#" + parsedGeneration);
+	// Get only the part before '#'
+    const parsedRunId = oldRunGen.substring(0, atSharp);
 
+	// Get the rest of them (number/generation) after '#'
+	const len = oldRunGen.length
+    const parsedGeneration = oldRunGen.substring(atSharp + 1, len);
 
+	console.log(parsedGeneration);
+
+    const numberedGeneration = parseInt(parsedGeneration);
+	console.log(numberedGeneration);
+    const addedOneGen = numberedGeneration + 1;
+
+    const newRunGen = parsedRunId + '#' + addedOneGen;
+    return newRunGen;
 }
 
 // Write all the children whose length

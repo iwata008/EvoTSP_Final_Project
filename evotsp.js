@@ -70,9 +70,7 @@
                 function initializePopulation(cb) {
                         const populationSize = parseInt($("#population-size-text-field").val());
                         console.log(
-                            `Initializing pop for runId = ${runId} with pop size ${populationSize},
-        ↪ generation = ${initialGeneration}`
-                        );
+                            `Initializing pop for runId = ${runId} with pop size ${populationSize},generation = ${initialGeneration}`);
                         $("#new-route-list").text("");
                         async.times(
                             populationSize,
@@ -446,8 +444,7 @@
         function displayBestRoutes(bestRoutes, dbp_cb) {
                 // FILL THIS IN
                 console.log("best routes:" + JSON.stringify(bestRoutes));
-                $("#best-route-list").append(`<li>routeId: ${bestRoutes[0].routeId} with length: ${bestRoutes[0].len}</li>`);
-
+                $("#best-route-list").append(`<li>${bestRoutes[0].routeId} (${bestRoutes[0].len})</li>`);
                 dbp_cb(null, bestRoutes);
         }
         ////////////////////////////////////////////////////////////
