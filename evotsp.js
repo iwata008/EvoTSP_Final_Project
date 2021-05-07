@@ -1,6 +1,6 @@
 (function evoTSPwrapper($) {
         const baseUrl =
-            "https://au293wdqh6.execute-api.us-east-1.amazonaws.com/prod";
+            "https://bvahf7wcik.execute-api.us-east-1.amazonaws.com/prod";
         /*
          * This is organized into sections:
          * - Declaration of some global variables
@@ -120,7 +120,7 @@
                         }),
                         contentType: 'application/json',
 
-                        success: (displayRoute) => callback(null, displayRoute),
+                        success: (displayRoute) => cb(null, displayRoute),
                         error: function ajaxError(jqXHR, textStatus, errorThrown) {
                                 console.error(
                                     'Error generating random route: ',
@@ -282,7 +282,7 @@
                 // FILL THIS IN
                 const runId = $('#runId-text-field').val();
                 const numToReturn = $('#num-parents').val();
-                generation = $('#num-generations').val();
+                // let generation = $('#num-generations').val();
 
                 $.ajax({
                         method:'GET',
@@ -330,7 +330,7 @@
                                 lengthStoreThreshold: lengthStoreThreshold,
                                 numChildren: numChildren
                         }),
-                        success: (children) => callback(null, children),
+                        success: (children) => cb(null, children),
                         error: function ajaxError(jqXHR, textStatus, errorThrown) {
                                 console.error(
                                     'Error making child routes: ',
@@ -445,15 +445,14 @@
         // the waterfall in `runGeneration`.
         function displayBestRoutes(bestRoutes, dbp_cb) {
                 // FILL THIS IN
-                console.log('Best route received from API: ', bestRoutes);
-
+                console.log('Best route received from API: ', bestRoutes[0]);
                 const length = bestRoutes[0].len;
                 const routeId = bestRoutes[0].routeId;
-                const route = bestRoutes[0].route;
-                const runGen = bestRoutes[0].runGen;
-                $('#best-route-list').append(`<li><b>Route:</b> ${route}, <b>Length:</b> ${length}, <b>RouteId:</b> ${routeId}</li>`);
-                dbp_cb(null, bestRoutes);
 
+                //const runGen = bestRoutes[0].runGen;
+
+                $('#best-route-list').append(`<li>${length} (${routeId})'</li>`);
+                dbp_cb(null, bestRoutes);
         }
         ////////////////////////////////////////////////////////////
         // END OF HTML DISPLAY /////////////////////////////////////
