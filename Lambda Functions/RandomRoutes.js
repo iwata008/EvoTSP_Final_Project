@@ -23,13 +23,15 @@ exports.handler = (event, context, callback) => {
 
         const length = computeDistance(routes, distances);
 
-        const runGen = runId + '#' + generation
+        const runGen = runId + '#' + generation;
 
         recordRoutes(runGen, routeId, routes, length)
-            .then(() => {
+            .then((result) => {
+                console.log(JSON.stringify(result));
+                console.log(runGen, routeId, routes, length);
                 callback(null, {
                     statusCode: 201,
-                    body: JSON.stringify({ routeId: routeId, length: length }),
+                    body: JSON.stringify({ routeId: routeId, len: length }),
                     headers: {
                         'Access-Control-Allow-Origin': '*'
                     }
@@ -113,8 +115,9 @@ function recordRoutes(runGen, routeId, route, length) {
             runGen: runGen,
             routeId: routeId,
             route: route,
-            length: length
+            len: length
         },
+        ReturnValues: "ALL_OLD"
     }).promise();
 }
 

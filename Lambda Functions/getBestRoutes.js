@@ -12,6 +12,7 @@ exports.handler = (event, context, callback) => {
 
 
             console.log("//////////I'm HERE/////////////");
+            console.log(JSON.stringify(dbResults));
             const bestRoutes = dbResults.Items;
             console.log(bestRoutes);
 
@@ -32,6 +33,8 @@ exports.handler = (event, context, callback) => {
 
 function getBestRoutes(runId, generation, numToReturn) {
     const runGen = runId + "#" + generation;
+    console.log(runGen);
+    console.log(numToReturn);
     return ddb.query({
         TableName: 'Routes',
         IndexName: 'runGen-len-index',
