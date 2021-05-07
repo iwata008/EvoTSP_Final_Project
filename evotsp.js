@@ -397,14 +397,14 @@
         // shouldn't have to do anything here, although you're welcome
         // to modify parts of this if you want to change the way
         // things look.
-        // A few of them are complete as is (`displayBestPath()` and
+        // A few of them are complete as is (`stPath()` and
         // `displayChildren()`), while others need to be written:
         //
         // - `displayRoute()`
-        // - `displayBestRoutes()`
+        // - `stRoutes()`
         // Display the details of the best path. This is complete,
         // but you can fancy it up if you wish.
-        function displayBestPath() {
+        function stPath() {
                 $("#best-length").text(best.len);
                 $("#best-path").text(JSON.stringify(best.bestPath));
                 $("#best-routeId").text(best.routeId);
@@ -445,13 +445,9 @@
         // the waterfall in `runGeneration`.
         function displayBestRoutes(bestRoutes, dbp_cb) {
                 // FILL THIS IN
-                console.log('Best route received from API: ', bestRoutes[0]);
-                const length = bestRoutes[0].len;
-                const routeId = bestRoutes[0].routeId;
+                console.log("best routes:" + JSON.stringify(bestRoutes));
+                $("#best-route-list").append(`<li>routeId: ${bestRoutes[0].routeId} with length: ${bestRoutes[0].len}</li>`);
 
-                //const runGen = bestRoutes[0].runGen;
-
-                $('#best-route-list').append(`<li>${length} (${routeId})'</li>`);
                 dbp_cb(null, bestRoutes);
         }
         ////////////////////////////////////////////////////////////
