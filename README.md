@@ -20,7 +20,7 @@ Peter Dolan / Nic McPhee
     - [`getCityData`](#getcitydata)
     - [`mutateRoute`](#mutateroute)
   
-## `getBestRoutes1
+## `getBestRoutes`
 ```js
 const AWS = require('aws-sdk');
 const ddb = new AWS.DynamoDB.DocumentClient();
