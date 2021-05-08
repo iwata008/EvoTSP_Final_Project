@@ -38,9 +38,12 @@ The application is structured with JavaScript (evotsp.js) and HTML. Through API,
 The appearance of the application looks like this. It is very simple and easy to use. 
 There are already numbers assigned in some fields; "population size" is 20 and "Number of parents to keep" and 'the number of generations to make' are 100 as default. 
 
-![image](/machiiwata/Desktop/screenshot-map)
+![image1](https://github.com/iwata008/EvoTSP_Final_Project/blob/main/screenshot/screenshot-map.png)
 
-By clicking "run evolution" the application creates the runId and starts looking for the best route. 
+By clicking "run evolution" the application creates the Run Id and starts looking for the best route. Until the last generation (which is 20 as default in this case) it keeps looking for the best route. It creates Run Id only once. This is how it looks when it's done finding the best route. 
+
+![image2](https://github.com/iwata008/EvoTSP_Final_Project/blob/main/screenshot/img2.png)
+![image3](https://github.com/iwata008/EvoTSP_Final_Project/blob/main/screenshot/img3.png)
 
 ## Code Apendice
 
