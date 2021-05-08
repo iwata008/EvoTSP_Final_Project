@@ -47,6 +47,8 @@ By clicking "run evolution" the application creates the Run Id and starts lookin
 
 ## Technical Details
 
+### API
+
 The application uses the API Gateway from AWS, and there are 5 resources for this application.
 
 - The `/best` endpoint uses the GET method, and it calls the getBestRoutes lambda function. And adding to /best, the path has runId, generation, and numToReturn which is the number of how many should be returned. This returns the best routes of the number you wanted to return. 
