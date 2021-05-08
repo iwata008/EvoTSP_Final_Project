@@ -29,13 +29,13 @@ Peter Dolan / Nic McPhee
 - [HTML](#html)
 	
 ## Overview/Purpose
-This application was created as the final project of a class called cloud computing. We made a web map app using the basics and skills we learned through the half-semester.
+This application was created as the final project of a class called cloud computing. We made a web map app using the basics and skills we learned through the half-semester. DynamoDB, Lambda, IAM, API Gateway from Amazon Web Services (AWS) are used in the project. This application computes and finds the shortest route of given cities in Minnesota state, and displays the best route on the map. The base idea/concept of this application is same as Traveling Salesman Problem (TSP) and which starts from a city and finds the route that visits each city exactly once and returns to the origin city. With AWS, building serverless computing service would be possible and we don't need to worry about storage, security, servers, databases, and more. 
 
 ## Overview/Solution
-This application was created as the final project of a class called cloud computing. I made a web map app using the basics and skills I learned through the semester.
+
 
 ## User Documentation
-This application was created as the final project of a class called cloud computing. I made a web map app using the basics and skills I learned through the semester.
+
 
 ## Code Apendice
 
