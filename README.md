@@ -45,6 +45,20 @@ By clicking "run evolution" the application creates the Run Id and starts lookin
 ![image2](https://github.com/iwata008/EvoTSP_Final_Project/blob/main/screenshot/img2.png)
 ![image3](https://github.com/iwata008/EvoTSP_Final_Project/blob/main/screenshot/img3.png)
 
+## Technical Details
+
+The application uses the API Gateway from AWS, and there are 5 resources for this application.
+
+- The `/best` endpoint uses the GET method, and it calls the getBestRoutes lambda function. And adding to /best, the path has runId, generation, and numToReturn which is the number of how many should be returned. This returns the best routes of the number you wanted to return. 
+
+- The `/Routes` endpoint uses the POST method, and it calls the generateRandomRoutes lambda function. It takes runId and generation to create random routes. And after the routes got created, it puts them into the database.
+
+- The `/Routes/{routeId}` endpoint uses the GET method and it calls the getRouteById lambda function. In order for this endpoint to work, the path has to have {routeId}. It takes routeId and returns routeId, runGen (runId and generation), len (length), and route of the passed routeId. 
+
+- The `/city-data` endpoint uses the GET method and it calls the getCityData lambda function. This one is very simple and does not take any argument. This gets the city data of the Minnesota region from the database.
+
+- The `mutateroute` endpoint uses the POST method and it calls the mutateRoutes lambda function. This takes numChildren (number of children), routeId, and lengthStoreThreshold.
+
 ## Code Apendice
 
 ### Lambda
