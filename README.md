@@ -20,11 +20,11 @@ Peter Dolan / Nic McPhee
 
 [Code Apendice](#codeapendice)
 - [Lambda](#lambda)
-	- [`getBestRoutes()`](#getbestroutes)
-	- [`generateRandomRoutes()`](#generateranomroutes)
-	- [`getRoutesById()`](#getroutebyid)
-	- [`getCityData()`](#getcitydata)
-	- [`mutateRoutes()`](#mutateroutes)
+	- [`getBestRoutes`](#getbestroutes)
+	- [`generateRandomRoutes`](#generateranomroutes)
+	- [`getRoutesById`](#getroutebyid)
+	- [`getCityData`](#getcitydata)
+	- [`mutateRoutes`](#mutateroutes)
 	
 
 ## Code Apendice
