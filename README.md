@@ -35,7 +35,12 @@ This application was created as the final project of a class called cloud comput
 The application is structured with JavaScript (evotsp.js) and HTML. Through API, Lambda functions are connected to the app and return the data after the request. The best route gets returned every generation and updated for each generation. Then the best route becomes the "parent" route and gets passed to create children routes in mutateRoutes lambda. With the children route, it will find a new best route. That will be repeated until the last generation and keep looking for the best route, and at the end of the process, it will display the best route on the map, and make a list of "best" such as routeId, length of the best path, path (for example, [city1, city3, city 9, ... city1]), and threshold. Threshold is used as limiting the writes number for the dynamoDB.
 
 ## User Documentation
+The appearance of the application looks like this. It is very simple and easy to use. 
+There are already numbers assigned in some fields; "population size" is 20 and "Number of parents to keep" and 'the number of generations to make' are 100 as default. 
 
+![image](/machiiwata/Desktop/screenshot-map)
+
+By clicking "run evolution" the application creates the runId and starts looking for the best route. 
 
 ## Code Apendice
 
@@ -1423,7 +1428,7 @@ evotsp.js
           tileSize: 512,
           zoomOffset: -1,
           accessToken:
-            "pk.eyJ1IjoiYWlybWFjaGk2NCIsImEiOiJja243amh3MjIwb2dlMm9yaW9pNmtqZjJuIn0.z89ll0flR8mqgW8ud1AXFw",
+            "myToken",
 
 
         }
