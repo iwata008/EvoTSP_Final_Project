@@ -61,6 +61,25 @@ The application uses the API Gateway from AWS, and there are 5 resources for thi
 
 - The `mutateroute` endpoint uses the POST method and it calls the mutateRoutes lambda function. This takes numChildren (number of children), routeId, and lengthStoreThreshold.
 
+### Lambda
+The 5 lambda functions are used in this application; getBestRoutes, generateRandomRoutes, getRotueById, getCityData, and mutateRoutes. Lambda runs code in response to events and manages the computing resources required by that code. 
+
+## `getBestRoutes`
+The getBestRoutes takes runId, generation, and numToReturn, and returns the bestRoutes with the routeId from the Routes database. There will be the same number of routes as the 'numToReturn'
+
+## `generateRandomRoutes`
+The generateRandomRoutes takes runId and generation and creates random routes, and puts those routes to the Routes database. This function takes information from the distance_data table and randomly shuffles the order of cities and computes the distance of the generated route. And the route, distance (length), and routeId will be put in the Routes table.
+
+## `getRouteById`
+The getRouteById takes routeId and returns routeId, runGen, len, and route of the passed routeId from the Routes table. There should be only returned route because the routeId is generated randomly and unique. 
+
+## `getCityData`
+The getCityData takes no argument and gets the information of the city of the Minnesota region from the distance_data table. We only get cities data because the size of the distance component grows as the square of the number of cities. 
+
+## `mutateRoutes`
+The mutateRoutes takes numChildren, routeId, and lengthStoreThreshold. It creates children routes with a given parent route to find a new best route. If the children is shorter than the "current threshold,"  they will get put in the Routes table.
+
+
 ## Code Apendice
 
 ### Lambda
