@@ -32,7 +32,7 @@ Peter Dolan / Nic McPhee
 This application was created as the final project of a class called cloud computing. We made a web map app using the basics and skills we learned through the half-semester. DynamoDB, Lambda, IAM, API Gateway from Amazon Web Services (AWS) are used in the project. This application computes and finds the shortest route of given cities in Minnesota state, and displays the best route on the map. The base idea/concept of this application is same as Traveling Salesman Problem (TSP) and which starts from a city and finds the route that visits each city exactly once and returns to the origin city. With AWS, building serverless computing service would be possible and we don't need to worry about storage, security, servers, databases, and more. 
 
 ## Overview/Solution
-
+The application is structured with JavaScript (evotsp.js) and HTML. Through API, Lambda functions are connected to the app and return the data after the request. The best route gets returned every generation and updated for each generation. Then the best route becomes the "parent" route and gets passed to create children routes in mutateRoutes lambda. With the children route, it will find a new best route. That will be repeated until the last generation and keep looking for the best route, and at the end of the process, it will display the best route on the map, and make a list of "best" such as routeId, length of the best path, path (for example, [city1, city3, city 9, ... city1]), and threshold. Threshold is used as limiting the writes number for the dynamoDB.
 
 ## User Documentation
 
