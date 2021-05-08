@@ -14,8 +14,8 @@ Peter Dolan / Nic McPhee
 [Technical Details](#technical-details)
  - [API](#api)
  - [Lambdas](#lambdas)
- - [IAM Roles](#iamroles)
- - [Table Structures](#tablestructures)
+ - [IAM Roles](#iam-roles)
+ - [Table Structures](#table-structures)
  - [Leaflet](#leaflet)
 
 [Code Apendice](#codeapendice)
@@ -78,6 +78,11 @@ The getCityData takes no argument and gets the information of the city of the Mi
 
 ## `mutateRoutes`
 The mutateRoutes takes numChildren, routeId, and lengthStoreThreshold. It creates children routes with a given parent route to find a new best route. If the children is shorter than the "current threshold,"  they will get put in the Routes table.
+
+### IAM Roles
+There is one role structured with 4 permissions used in this application. These 4 permission are PutItem, GetItem, Query and BatchWriteItem. PutItem is used when putting data to the Routes table. We use PutItem in generateRandomRoute lambda when routes get created. GetItem is used when getting specific data from the Routes and distance_data tables. The point of GetItem is 'Key' and it's used to extract specific things. For example, in getDistanceData() in mutateRoutes lambda, the Key is {region: Minnesota} and it means it gets only the Minnesota data in the case where there are more than one states in the table. Query is used when querying the data from a database. It is used in getBestRoutes lambda. And BatchWriteItem is used to write many data to the database. In our case, it is used in mutateRoutes lambda to write children to the Routes table.
+
+
 
 
 ## Code Apendice
