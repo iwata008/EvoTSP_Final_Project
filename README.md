@@ -9,9 +9,9 @@ Peter Dolan / Nic McPhee
 
 [Overview/Solution](#overviewsolution)
 
-[User Documentation](#userdocumentation)
+[User Documentation](#user-documentation)
 
-[Technical Details](#technicaldetails)
+[Technical Details](#technical-details)
  - [API](#api)
  - [Lambdas](#lambdas)
  - [IAM Roles](#iamroles)
