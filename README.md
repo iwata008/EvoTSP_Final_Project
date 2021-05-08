@@ -14,13 +14,23 @@ Peter Dolan / Nic McPhee
 [Technical Details](#technicaldetails)
  - [API](#api)
  - [Lambdas](#lambdas)
-    - [`getBestRotues`](#getbestroutes)  
-    - [`generateRandomRoutes`](#generateRandomeRoutes)
-    - [`getRouteById`](#getroutebyid)
-    - [`getCityData`](#getcitydata)
-    - [`mutateRoute`](#mutateroute)
+ - [IAM Roles](#iamroles)
+ - [Table Structures](#tablestructures)
+ - [Leaflet](#leaflet)
+
+[Code Apendice](#codeapendice)
+- [Lambda](#lambda)
+	- [`getBestRoutes()`](#getbestroutes())
+	- [`generateRandomRoutes()`](#generateranomroutes())
+	- [`getRoutesById()`](#getroutebyid())
+	- [`getCityData()`](#getcitydata())
+	- [`mutateRoutes()`](#mutateroutes())
+	
+
+## Code Apendice
+
   
-## `getBestRoutes`
+## `getBestRoutes()`
 ```js
 const AWS = require('aws-sdk');
 const ddb = new AWS.DynamoDB.DocumentClient();
@@ -85,7 +95,7 @@ function errorResponse(errorMessage, awsRequestId, callback) {
 }
 ```
 
-## `generateRandomRoutes`
+## `generateRandomRoutes()`
 ```js
 // Got help from Utkarsh and Nicc
 
@@ -245,7 +255,7 @@ function errorResponse(errorMessage, awsRequestId, callback) {
 }
 ```
 
-## `getRouteById`
+## `getRouteById()`
 ```js
 const AWS = require('aws-sdk');
 const ddb = new AWS.DynamoDB.DocumentClient();
@@ -297,7 +307,7 @@ function errorResponse(errorMessage, awsRequestId, callback) {
     });
 }
 ```
-## `getCiyData`
+## `getCiyData()`
 ```js
 const AWS = require('aws-sdk');
 const ddb = new AWS.DynamoDB.DocumentClient();
@@ -350,7 +360,7 @@ function errorResponse(errorMessage, awsRequestId, callback) {
 }
 ```
 
-## `mutateRoutes`
+## `mutateRoutes()`
 ```js 
 const AWS = require('aws-sdk');
 const ddb = new AWS.DynamoDB.DocumentClient();
