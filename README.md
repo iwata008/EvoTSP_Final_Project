@@ -61,7 +61,7 @@ The application uses the API Gateway from AWS, and there are 5 resources for thi
 
 - The `mutateroute` endpoint uses the POST method and it calls the mutateRoutes lambda function. This takes numChildren (number of children), routeId, and lengthStoreThreshold.
 
-### Lambda
+### Lambdas
 The 5 lambda functions are used in this application; getBestRoutes, generateRandomRoutes, getRotueById, getCityData, and mutateRoutes. Lambda runs code in response to events and manages the computing resources required by that code. 
 
 ## `getBestRoutes`
