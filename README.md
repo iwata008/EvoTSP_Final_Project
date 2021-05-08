@@ -28,10 +28,18 @@ Peter Dolan / Nic McPhee
 - [JavaScript](#javascript)
 - [HTML](#html)
 	
+## Overview/Purpose
+This application was created as the final project of a class called cloud computing. We made a web map app using the basics and skills we learned through the half-semester.
+
+## Overview/Solution
+This application was created as the final project of a class called cloud computing. I made a web map app using the basics and skills I learned through the semester.
+
+## User Documentation
+This application was created as the final project of a class called cloud computing. I made a web map app using the basics and skills I learned through the semester.
 
 ## Code Apendice
 
-### Lambda  
+### Lambda
 ## `getBestRoutes()`
 ```js
 const AWS = require('aws-sdk');
@@ -710,7 +718,9 @@ function errorResponse(errorMessage, awsRequestId, callback) {
     });
 }
 ```
-### JavaScript (evotsp.js)
+### JavaScript 
+
+evotsp.js
 ```js
 (function evoTSPwrapper($) {
         const baseUrl =
