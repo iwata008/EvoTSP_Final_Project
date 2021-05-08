@@ -87,20 +87,33 @@ function shuffle(array) {
 
     }
 }
-
+/*
 function computeDistance(routes, distance) {
 
-    var routeDistance = 0;
+    let routeDistance = 0;
 
     for (let i = 0; i < routes.length - 1; i++) {
         const currentCity = routes[i];
         const nextCity = routes[i + 1];
-        routeDistance += distance[currentCity][nextCity];
+        routeDistance = routeDistance + distance[currentCity][nextCity];
     }
-    routeDistance += distance[routes.length - 1][0]
+    routeDistance = routeDistance + distance[routes.length - 1][0]
+    return routeDistance;
+} */
+
+function computeDistance(route, distances) {
+
+    let routeDistance = 0;
+
+    for (let i = 0; i < route.length - 1; i++) {
+        routeDistance = routeDistance + distances[route[i]][route[i + 1]];
+
+    }
+
+    routeDistance = routeDistance + distances[route[0]][route[route.length - 1]];
+
     return routeDistance;
 }
-
 
 
 

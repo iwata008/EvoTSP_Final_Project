@@ -97,11 +97,11 @@ function getRouteById(routeId) {
 // be quite short.
 function generateChildren(distanceData, parentRoute, numChildren) {
     // FILL THIS IN
-     var newRoutes = [];
-    for (let i = 0; i < numChildren; i++) {
-      newRoutes.push(generateChild(distanceData, parentRoute));
-    }
+     var newRoutes = new Array();
 
+   for (let i=0; i<numChildren; i++){ //creating a child route based off of the parent route and putting it into spot i of the array
+        newRoutes[i] = generateChild(distanceData, parentRoute);
+    }
     return newRoutes;
 
     // You could just use a for-loop for this, or see
@@ -227,7 +227,10 @@ function recordChildren(children, lengthStoreThreshold) {
         });
     }
 
-   ddb.batchWrite(child).promise();
+   ddb.batchWrite(child, function(err, data) {
+        if (err) console.log(err);
+        else console.log(data);
+    }).promise();
 
     // After the `ddb.batchWrite()` has completed, make sure you
     // return the `childrenToWrite` array.
@@ -260,6 +263,7 @@ function returnChildren(callback, children) {
 
        let returnChild = children.sort(sortByLength("len"));
 
+       let jsonChild = [];
 
        // Get an idea to remove JSON element in JavaScript
        // from https://stackoverflow.com/questions/5310304/remove-json-element/39753601
@@ -267,15 +271,17 @@ function returnChildren(callback, children) {
        // routeId and len will be left
 
        for (let i = 0; i < children.length; i++) {
-           delete returnChild[i].runGen;
-           delete returnChild[i].route;
-       }
+           jsonChild.push({
+               routeId: returnChild[i].routeId,
+               len: returnChild[i].len
+           })
 
+       }
 
         // call returnChild in body so it returns the array of children sorted by length
         callback(null, {
         statusCode: 201,
-        body: JSON.stringify({returnChild}),
+        body: JSON.stringify(jsonChild),
         headers: {
             'Access-Control-Allow-Origin': '*',
         },
@@ -283,8 +289,6 @@ function returnChildren(callback, children) {
 
 
 }
-
-
 
 // Made a helper function for sorting an array of children
 // https://medium.com/@asadise/sorting-a-json-array-according-one-property-in-javascript-18b1d22cd9e9
@@ -302,19 +306,18 @@ function sortByLength(length){
 
 // Compute the length of the given route.
 // This one is complete
-function computeDistance(distance, routes) {
+function computeDistance(distances, route) {
 
-    var routeDistance = 0;
+    let routeDistance = 0;
 
-    for (let i = 0; i < routes.length - 1; i++) {
-        const currentCity = routes[i];
-        const nextCity = routes[i + 1];
-        routeDistance += distance[currentCity][nextCity];
+    for (let i = 0; i < route.length - 1; i++) {
+        routeDistance = routeDistance + distances[route[i]][route[i + 1]];
+
     }
-    routeDistance += distance[routes.length - 1][0];
+
+    routeDistance = routeDistance + distances[route[0]][route[route.length - 1]];
+
     return routeDistance;
-    // REMEMBER TO INCLUDE THE COST OF GOING FROM THE LAST
-    // CITY BACK TO THE FIRST!
 }
 
 function newId() {

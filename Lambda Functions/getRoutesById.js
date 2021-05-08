@@ -5,7 +5,7 @@ exports.handler = (event, context, callback) => {
     const pathParameters = event.pathParameters;
     const routeId1 = pathParameters.routeId;
 
-    console.log(routeId1);
+    //console.log(routeId1);
 
     getRouteById(routeId1)
         .then(dbResults => {
