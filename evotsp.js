@@ -71,7 +71,7 @@
                         const populationSize = parseInt($("#population-size-text-field").val());
                         console.log(
                             `Initializing pop for runId = ${runId} with pop size ${populationSize},generation = ${initialGeneration}`);
-                        $("#new-route-list").text("");
+                      //  $("#new-route-list").text("");
                         async.times(
                             populationSize,
                             (counter, rr_cb) => randomRoute(runId, initialGeneration, rr_cb),
@@ -351,7 +351,7 @@
                         method:'GET',
                         url: baseUrl + '/Routes/' + routeId,
                         contentType: 'application/json',
-                        success: (route) => callback(null, route),
+                        success: (route) => callback(route),
                         error: function ajaxError(jqXHR, textStatus, errorThrown) {
                                 console.error(
                                     'Error getting route: ',
@@ -402,7 +402,7 @@
         // - `stRoutes()`
         // Display the details of the best path. This is complete,
         // but you can fancy it up if you wish.
-        function stPath() {
+        function displayBestPath() {
                 $("#best-length").text(best.len);
                 $("#best-path").text(JSON.stringify(best.bestPath));
                 $("#best-routeId").text(best.routeId);
@@ -417,6 +417,7 @@
 
         // should be complete and work as is.
         function displayChildren(children, dc_cb) {
+        //  $('#new-route-list').text("");
                 children.forEach(child => displayRoute(child));
                 dc_cb(null, children);
         }
@@ -426,8 +427,12 @@
         function displayRoute(result) {
                 // FILL THIS
                 console.log('New route received from API: ', result);
-                const length = result.len;
-                const routeId = result.routeId;
+                let length = result.len;
+                let routeId = result.routeId;
+
+                console.log("//////////// HERE /////////////");
+                console.log(length);
+                console.log(routeId);
 
                 $('#new-route-list').append(`<li>We generated route ${routeId} with len ${length}`);
         }
@@ -443,7 +448,7 @@
         // the waterfall in `runGeneration`.
         function displayBestRoutes(bestRoutes, dbp_cb) {
                 // FILL THIS IN
-                console.log("best routes:" + JSON.stringify(bestRoutes));
+            //    console.log("best routes:" + JSON.stringify(bestRoutes));
                 $("#best-route-list").append(`<li>${bestRoutes[0].routeId} (${bestRoutes[0].len})</li>`);
                 dbp_cb(null, bestRoutes);
         }
@@ -472,6 +477,8 @@
         //
         // This is complete and you shouldn't have to modify it.
         function updateBest(routeId) {
+          console.log(" *********** HERE ***********");
+          console.log(routeId);
                 getRouteById(routeId, processNewRoute);
                 function processNewRoute(route) {
                         // We need to check that this route is _still_ the
