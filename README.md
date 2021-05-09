@@ -82,6 +82,20 @@ The mutateRoutes takes numChildren, routeId, and lengthStoreThreshold. It create
 ### IAM Roles
 There is one role structured with 4 permissions used in this application. These 4 permission are PutItem, GetItem, Query and BatchWriteItem. PutItem is used when putting data to the Routes table. We use PutItem in generateRandomRoute lambda when routes get created. GetItem is used when getting specific data from the Routes and distance_data tables. The point of GetItem is 'Key' and it's used to extract specific things. For example, in getDistanceData() in mutateRoutes lambda, the Key is {region: Minnesota} and it means it gets only the Minnesota data in the case where there are more than one states in the table. Query is used when querying the data from a database. It is used in getBestRoutes lambda. And BatchWriteItem is used to write many data to the database. In our case, it is used in mutateRoutes lambda to write children to the Routes table.
 
+### Table Structures
+## distance_data
+- Fields
+    - This is constructed as JSON object and there are three fields in the distance_data table; 'region' 'cities' and 'distances.' This table is used to store the data of cities of Minnesota including city name, index, location, and zip code. In this application, there is only one 'region' which is 'Minnesota.' And there are 11 cities contained with the data of name, index, etc.
+- Primary Key
+    - For this table, ‘region’ is the primary partition key,  and not using the sort key. And there are no secondary keys either. It is because there is no need for this table to be sorted.
+
+## Routes
+- Fields
+    - This table is used to to store the data when routes are created. It is structured with routeId, len, route, and runGen. 
+
+- Primary Key
+    - For this table, ‘routeId’ is the primary partition key,  and not using the sort key. And as the secondary index, runGen is used as the partition key and len is used as the sort key for this table. 
+
 
 
 
