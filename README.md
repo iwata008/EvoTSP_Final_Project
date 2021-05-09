@@ -18,7 +18,7 @@ Peter Dolan / Nic McPhee
  - [Table Structures](#table-structures)
  - [Leaflet](#leaflet)
 
-[Code Apendice](#codeapendice)
+[Code Apendices](#code-apendices)
 - [Lambda](#lambda)
 	- [`getBestRoutes`](#getbestroutes)
 	- [`generateRandomRoutes`](#generaterandomroutes)
@@ -96,10 +96,11 @@ There is one role structured with 4 permissions used in this application. These 
 - Primary Key
     - For this table, ‘routeId’ is the primary partition key,  and not using the sort key. And as the secondary index, runGen is used as the partition key and len is used as the sort key for this table. 
 
+## Leaflet
+For this application, we used JavaScript library called Leaflet to add interactive map on the webpage. The role of Leaflet in this application is to display the best routes that are found through the process on a map. And we used MapBox as a tile provider. I personally think dotted lines work very well on the map because whenever the best route gets updated, it changes the route so it looks like the line is moving. It seems like a "live" map and it looks cool so I chose the dotted lines. For the color, I wanted to choose one of the three primary colors (red, blue, and green) and white. Red was already used to identify where all the cities are so it got eliminated from the options. And green was also a similar color to the map overall so I didn't choose it. So I chose blue and white, and the color combination pops out very well. 
 
 
-
-## Code Apendice
+## Code Apendices
 
 ### Lambda
 ## `getBestRoutes()`
